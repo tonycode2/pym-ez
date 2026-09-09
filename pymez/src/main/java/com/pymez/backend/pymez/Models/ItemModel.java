@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "item")
 public class ItemModel {
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
@@ -28,7 +28,7 @@ public class ItemModel {
     private String color;
     private BigDecimal weight;
     private BigDecimal height;
-    @ElementCollection 
+    @ElementCollection
     private ArrayList<String> categories;
     @Column(name = "item_price")
     private BigDecimal itemPrice;
@@ -39,7 +39,7 @@ public class ItemModel {
     @Column(name = "requested_quantity")
     private Integer requestedQuantity;
     @Column(name = "is_available")
-    private Boolean isAvailable;    
+    private Boolean isAvailable;
     @Column(name = "date_created")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Instant dateCreated;
@@ -74,10 +74,11 @@ public class ItemModel {
     public ItemModel() {
     }
 
-    //Getters and Setters
+    // Getters and Setters
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -194,8 +195,10 @@ public class ItemModel {
         this.lastSoldAt = lastSoldAt;
     }
 
-    /** 
-     * This is a modified version of toString. It does not return everything, just for readibility
+    /**
+     * This is a modified version of toString. It does not return everything, just
+     * for readibility
+     * 
      * @return String
      */
     @Override
@@ -204,11 +207,13 @@ public class ItemModel {
                 + ", weight=" + weight + ", height=" + height + ", itemPrice=" + itemPrice + ", sellPrice=" + sellPrice
                 + ", availableQuantity=" + availableQuantity + ", requestedQuantity=" + requestedQuantity
                 + ", isAvailable=" + isAvailable + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated
-                + ", lastSoldAt=" + lastSoldAt + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+                + ", lastSoldAt=" + lastSoldAt + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+                + "]";
     }
-    
-    /** 
+
+    /**
      * This hashCode function will work just with the Id of the item
+     * 
      * @return int
      * @see java.lang.Object#hashCode()
      * 
@@ -220,9 +225,10 @@ public class ItemModel {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-    
+
     /**
      * This equals function will work just with the Id of the item
+     * 
      * @return boolean
      * @see java.lang.Object#equals(java.lang.Object)
      */
@@ -244,21 +250,26 @@ public class ItemModel {
     }
 
     /**
-     * This function will update both dateCreated and dateUpdated when the object gets created
+     * This function will update both dateCreated and dateUpdated when the object
+     * gets created
+     * 
      * @return void
      */
-    @PrePersist 
-    protected void onCreate(){
+    @PrePersist
+    protected void onCreate() {
         this.dateCreated = Instant.now();
         this.dateUpdated = Instant.now();
     }
 
     /**
      * This function will update dateUpdated when something changes in the object
+     * 
      * @return void
      */
-    @PreUpdate 
-    protected void onUpdate(){
+    @PreUpdate
+    protected void onUpdate() {
         this.dateUpdated = Instant.now();
     }
+
+    // TODO: add mappers
 }
