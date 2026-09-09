@@ -1,7 +1,7 @@
 package com.pymez.backend.pymez.Models;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -42,18 +42,18 @@ public class ItemModel {
     private Boolean isAvailable;    
     @Column(name = "date_created")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime dateCreated;
+    private Instant dateCreated;
     @Column(name = "date_updated")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime dateUpdated;
+    private Instant dateUpdated;
     @Column(name = "last_sold_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime lastSoldAt;
+    private Instant lastSoldAt;
 
     public ItemModel(Long id, String name, String description, String color, BigDecimal weight, BigDecimal height,
             ArrayList<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
-            Integer requestedQuantity, Boolean isAvailable, LocalDateTime dateCreated, LocalDateTime dateUpdated,
-            LocalDateTime lastSoldAt) {
+            Integer requestedQuantity, Boolean isAvailable, Instant dateCreated, Instant dateUpdated,
+            Instant lastSoldAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -170,27 +170,27 @@ public class ItemModel {
         this.isAvailable = isAvailable;
     }
 
-    public LocalDateTime getDateCreated() {
+    public Instant getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
+    public void setDateCreated(Instant dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public LocalDateTime getDateUpdated() {
+    public Instant getDateUpdated() {
         return dateUpdated;
     }
 
-    public void setDateUpdated(LocalDateTime dateUpdated) {
+    public void setDateUpdated(Instant dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
 
-    public LocalDateTime getLastSoldAt() {
+    public Instant getLastSoldAt() {
         return lastSoldAt;
     }
 
-    public void setLastSoldAt(LocalDateTime lastSoldAt) {
+    public void setLastSoldAt(Instant lastSoldAt) {
         this.lastSoldAt = lastSoldAt;
     }
 
@@ -249,8 +249,8 @@ public class ItemModel {
      */
     @PrePersist 
     protected void onCreate(){
-        this.dateCreated = LocalDateTime.now();
-        this.dateUpdated = LocalDateTime.now();
+        this.dateCreated = Instant.now();
+        this.dateUpdated = Instant.now();
     }
 
     /**
@@ -259,6 +259,6 @@ public class ItemModel {
      */
     @PreUpdate 
     protected void onUpdate(){
-        this.dateUpdated = LocalDateTime.now();
+        this.dateUpdated = Instant.now();
     }
 }
