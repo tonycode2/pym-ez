@@ -74,16 +74,13 @@ public class ItemModel {
     public ItemModel() {
     }
 
-    
-
+    //Getters and Setters
     public Long getId() {
         return id;
     }
-    /*
     public void setId(Long id) {
         this.id = id;
     }
-    */
 
     public String getName() {
         return name;
@@ -197,7 +194,10 @@ public class ItemModel {
         this.lastSoldAt = lastSoldAt;
     }
 
-    //toString
+    /** 
+     * This is a modified version of toString. It does not return everything, just for readibility
+     * @return String
+     */
     @Override
     public String toString() {
         return "ItemModel [id=" + id + ", name=" + name + ", description=" + description + ", color=" + color
@@ -206,7 +206,13 @@ public class ItemModel {
                 + ", isAvailable=" + isAvailable + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated
                 + ", lastSoldAt=" + lastSoldAt + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
     }
-
+    
+    /** 
+     * This hashCode function will work just with the Id of the item
+     * @return int
+     * @see java.lang.Object#hashCode()
+     * 
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -214,7 +220,12 @@ public class ItemModel {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-
+    
+    /**
+     * This equals function will work just with the Id of the item
+     * @return boolean
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -232,15 +243,22 @@ public class ItemModel {
         return true;
     }
 
+    /**
+     * This function will update both dateCreated and dateUpdated when the object gets created
+     * @return void
+     */
     @PrePersist 
     protected void onCreate(){
         this.dateCreated = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
     }
 
+    /**
+     * This function will update dateUpdated when something changes in the object
+     * @return void
+     */
     @PreUpdate 
     protected void onUpdate(){
         this.dateUpdated = LocalDateTime.now();
     }
-
 }
