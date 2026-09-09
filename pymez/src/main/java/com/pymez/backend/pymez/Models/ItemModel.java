@@ -271,5 +271,5 @@ public class ItemModel {
         this.dateUpdated = Instant.now();
     }
 
-    // TODO: add mappers
+    // TODO: add mappers. We can use MapStruct perhaps
 }
