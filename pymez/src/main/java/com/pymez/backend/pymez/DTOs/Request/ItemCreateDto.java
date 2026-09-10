@@ -13,47 +13,47 @@ import jakarta.validation.constraints.Size;
 
 public class ItemCreateDto {
     @NotBlank(message = "The name must not be empty or null")
-    public String name;
+    private String name;
     @NotBlank(message = "The description must not be empty or null")
-    public String description;
+    private String description;
     @NotBlank(message = "The color must not be empty or null")
-    public String color;
+    private String color;
     @Digits(integer = 6, fraction = 4, message = "The weight should be a number")
     @Positive(message = "The weight should be a positive number")
     @NotNull(message = "The weight must not be null")
-    public BigDecimal weight;
+    private BigDecimal weight;
     @Digits(integer = 6, fraction = 4, message = "The height should be a number")
     @Positive(message = "The height should be a positive number")
     @NotNull(message = "The height must not be null")
-    public BigDecimal height;
+    private BigDecimal height;
     @Size(min = 1, max = 5, message = "The categories have a min of 1 and a max of 5")
-    public ArrayList<String> categories;
+    private ArrayList<String> categories;
     @Digits(integer = 10, fraction = 4, message = "The price should be a number")
     @Positive(message = "The price should be a positive number")
     @NotNull(message = "The item price must not be null")
-    public BigDecimal itemPrice;
+    private BigDecimal itemPrice;
     @Digits(integer = 10, fraction = 4, message = "The selling price should be a number")
     @Positive(message = "The selling price should be a positive number")
     @NotNull(message = "The selling must not be null")
-    public BigDecimal sellPrice;
+    private BigDecimal sellPrice;
     @Digits(integer = 6, fraction = 0, message = "The available quantity must be a number")
     @Positive(message = "The available quantity must be a positive number")
     @NotNull(message = "The available quantity must not be null")
-    public Integer availableQuantity;
+    private Integer availableQuantity;
     @Digits(integer = 6, fraction = 0, message = "The requested quantity must be a number")
     @Positive(message = "The requested quantity must be a positive number")
     @NotNull(message = "The requested quantity must not be null")
-    public Integer requestedQuantity;
+    private Integer requestedQuantity;
     @NotNull
-    public Boolean isAvailable;
+    private Boolean isAvailable;
     @PastOrPresent(message = "The date created can not be a past date")
     @NotNull(message = "The date created must not be null")
-    public Instant dateCreated;
+    private Instant dateCreated;
     @PastOrPresent(message = "The date updated can not be a past date")
     @NotNull(message = "The date updated must not be null")
-    public Instant dateUpdated;
+    private Instant dateUpdated;
     @PastOrPresent(message = "The last sold date can not be a past date")
-    public Instant lastSoldAt;
+    private Instant lastSoldAt;
 
     public ItemCreateDto(String name,
             String description,
@@ -86,6 +86,118 @@ public class ItemCreateDto {
     }
 
     public ItemCreateDto() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+    public BigDecimal getHeight() {
+        return height;
+    }
+
+    public void setHeight(BigDecimal height) {
+        this.height = height;
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<String> categories) {
+        this.categories = categories;
+    }
+
+    public BigDecimal getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public BigDecimal getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(BigDecimal sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    public Integer getAvailableQuantity() {
+        return availableQuantity;
+    }
+
+    public void setAvailableQuantity(Integer availableQuantity) {
+        this.availableQuantity = availableQuantity;
+    }
+
+    public Integer getRequestedQuantity() {
+        return requestedQuantity;
+    }
+
+    public void setRequestedQuantity(Integer requestedQuantity) {
+        this.requestedQuantity = requestedQuantity;
+    }
+
+    public Boolean getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
+    public Instant getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Instant dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Instant getDateUpdated() {
+        return dateUpdated;
+    }
+
+    public void setDateUpdated(Instant dateUpdated) {
+        this.dateUpdated = dateUpdated;
+    }
+
+    public Instant getLastSoldAt() {
+        return lastSoldAt;
+    }
+
+    public void setLastSoldAt(Instant lastSoldAt) {
+        this.lastSoldAt = lastSoldAt;
     }
 
 }
