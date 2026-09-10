@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PymezApplication<pymez>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.pymez.backend.pymez.PymezApplication",
+            "projectName": "pymez",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
