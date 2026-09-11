@@ -16,10 +16,10 @@ public class ItemUpdateDto extends ItemCreateDto {
 
     public ItemUpdateDto(String name, String description, String color, BigDecimal weight, BigDecimal height,
             ArrayList<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
-            Integer requestedQuantity, Boolean isAvailable, Instant dateCreated, Instant dateUpdated,
+            Integer requestedQuantity, Boolean isAvailable, String picUrl, Instant dateCreated, Instant dateUpdated,
             Instant lastSoldAt, Long id) {
         super(name, description, color, weight, height, categories, itemPrice, sellPrice, availableQuantity,
-                requestedQuantity, isAvailable, dateCreated, dateUpdated, lastSoldAt);
+                requestedQuantity, isAvailable, picUrl, dateCreated, dateUpdated, lastSoldAt);
         this.id = id;
     }
 

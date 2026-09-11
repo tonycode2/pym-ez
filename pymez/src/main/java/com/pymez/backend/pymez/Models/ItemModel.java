@@ -40,6 +40,7 @@ public class ItemModel {
     private Integer requestedQuantity;
     @Column(name = "is_available")
     private Boolean isAvailable;
+    private String picUrl;
     @Column(name = "date_created")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Instant dateCreated;
@@ -52,7 +53,7 @@ public class ItemModel {
 
     public ItemModel(Long id, String name, String description, String color, BigDecimal weight, BigDecimal height,
             ArrayList<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
-            Integer requestedQuantity, Boolean isAvailable, Instant dateCreated, Instant dateUpdated,
+            Integer requestedQuantity, Boolean isAvailable, String picUrl, Instant dateCreated, Instant dateUpdated,
             Instant lastSoldAt) {
         this.id = id;
         this.name = name;
@@ -66,6 +67,7 @@ public class ItemModel {
         this.availableQuantity = availableQuantity;
         this.requestedQuantity = requestedQuantity;
         this.isAvailable = isAvailable;
+        this.picUrl = picUrl;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
         this.lastSoldAt = lastSoldAt;
@@ -169,6 +171,14 @@ public class ItemModel {
 
     public void setIsAvailable(Boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public Instant getDateCreated() {

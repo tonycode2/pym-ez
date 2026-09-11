@@ -16,13 +16,14 @@ public class ItemResponseDto {
     private Integer availableQuantity;
     private Integer requestedQuantity;
     private Boolean isAvailable;
+    private String picUrl;
     private Instant dateCreated;
     private Instant dateUpdated;
     private Instant lastSoldAt;
 
     public ItemResponseDto(String name, String description, String color, BigDecimal weight, BigDecimal height,
             ArrayList<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
-            Integer requestedQuantity, Boolean isAvailable, Instant dateCreated, Instant dateUpdated,
+            Integer requestedQuantity, Boolean isAvailable, String picUrl, Instant dateCreated, Instant dateUpdated,
             Instant lastSoldAt) {
         this.name = name;
         this.description = description;
@@ -33,6 +34,7 @@ public class ItemResponseDto {
         this.itemPrice = itemPrice;
         this.sellPrice = sellPrice;
         this.availableQuantity = availableQuantity;
+        this.picUrl = picUrl;
         this.requestedQuantity = requestedQuantity;
         this.isAvailable = isAvailable;
         this.dateCreated = dateCreated;
@@ -125,6 +127,14 @@ public class ItemResponseDto {
 
     public Boolean getIsAvailable() {
         return isAvailable;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public void setIsAvailable(Boolean isAvailable) {
