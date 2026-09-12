@@ -1,6 +1,7 @@
 package com.pymez.backend.pymez.Models.Mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -48,28 +49,40 @@ public class ItemMapperTest {
 
     @Test
     void testItemModelToItemResponseDto() {
-        ItemUpdateDto dto = new ItemUpdateDto();
-        dto.setId(1l);
-        dto.setName("Teclado");
-        dto.setColor("Verde");
-        dto.setWeight(new BigDecimal(4.4));
-        dto.setHeight(new BigDecimal(5.5));
-        dto.setCategories(new ArrayList<>(List.of("Tecnologia")));
-        dto.setItemPrice(new BigDecimal(55.9));
-        dto.setSellPrice(new BigDecimal(100.9));
-        dto.setAvailableQuantity(19);
-        dto.setRequestedQuantity(200);
-        dto.setIsAvailable(true);
-        dto.setDateCreated(Instant.now());
-        dto.setDateUpdated(Instant.now());
-        dto.setLastSoldAt(Instant.now());
+        ItemModel model = new ItemModel();
+        model.setId(1l);
+        model.setName("Teclado");
+        model.setColor("Verde");
+        model.setWeight(new BigDecimal(4.4));
+        model.setHeight(new BigDecimal(5.5));
+        model.setCategories(new ArrayList<>(List.of("Tecnologia")));
+        model.setItemPrice(new BigDecimal(55.9));
+        model.setSellPrice(new BigDecimal(100.9));
+        model.setAvailableQuantity(19);
+        model.setRequestedQuantity(200);
+        model.setIsAvailable(true);
+        model.setDateCreated(Instant.now());
+        model.setDateUpdated(Instant.now());
+        model.setLastSoldAt(Instant.now());
 
-        ItemModel model = mapper.itemUpdateDtoToItemModel(dto);
+        ItemUpdateDto dto = new ItemUpdateDto();
+        dto.setName("Mouse");
+        dto.setHeight(new BigDecimal(9.7));
+        dto.setItemPrice(new BigDecimal(60.12));
+        dto.setSellPrice(new BigDecimal(90.6));
+        dto.setIsAvailable(false);
+
+        mapper.itemUpdateDtoToItemModel(dto, model);
 
         assertNotNull(model, "The model should not be null");
         assertEquals(1l, model.getId());
-        assertEquals(200, model.getRequestedQuantity());
+        assertEquals("Mouse", model.getName());
+        assertEquals(9.7, model.getHeight());
+        assertEquals(60.12, model.getItemPrice());
+        assertEquals(90.6, model.getSellPrice());
+        assertEquals(19, model.getAvailableQuantity());
         assertEquals("Verde", model.getColor());
+        assertFalse(model.getIsAvailable());
 
         assertNotNull(model.getId(), "The ID should not be null");
     }

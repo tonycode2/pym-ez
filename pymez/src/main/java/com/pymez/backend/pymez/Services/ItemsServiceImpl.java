@@ -66,10 +66,12 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
         return mapper.itemModelToItemResponseDto(itemModel);
     }
 
-    // TODO: see if using patch instead of put changes this function
-    // TODO: see @MappingTarget to update
     /**
-     * This function will update an existing item with new incoming information
+     * This function will update an existing item with new incoming information.
+     * We can use this same function to update any given information. For example,
+     * if we want to update just the picture, or the name we can send an object in
+     * the body with just that data and it will change just that
+     * Patch can be used here
      * 
      * @throws ItemsException
      * @return ItemResponseDto
@@ -78,21 +80,8 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     public ItemResponseDto update(ItemUpdateDto updateDto) {
         var existingItem = repo.findById(updateDto.getId())
                 .orElseThrow(() -> new ItemsException("The item was not located. ID: " + updateDto.getId()));
-        existingItem.setName(updateDto.getName());
-        existingItem.setDescription(updateDto.getDescription());
-        existingItem.setColor(updateDto.getColor());
-        existingItem.setWeight(updateDto.getWeight());
-        existingItem.setHeight(updateDto.getHeight());
-        existingItem.setCategories(updateDto.getCategories());
-        existingItem.setItemPrice(updateDto.getItemPrice());
-        existingItem.setSellPrice(updateDto.getSellPrice());
-        existingItem.setAvailableQuantity(updateDto.getAvailableQuantity());
-        existingItem.setRequestedQuantity(updateDto.getRequestedQuantity());
-        existingItem.setIsAvailable(updateDto.getIsAvailable());
-        existingItem.setPicUrl(updateDto.getPicUrl());
-        existingItem.setDateCreated(updateDto.getDateCreated());
-        existingItem.setDateUpdated(updateDto.getDateUpdated());
-        existingItem.setLastSoldAt(updateDto.getLastSoldAt());
+
+        mapper.itemUpdateDtoToItemModel(updateDto, existingItem);
 
         var updatedItem = repo.save(existingItem);
         log.info("The item with ID {} was updated", updateDto.getId());

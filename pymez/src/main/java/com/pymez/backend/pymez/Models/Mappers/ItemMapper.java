@@ -4,6 +4,8 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Javadoc;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
 import com.pymez.backend.pymez.DTOs.Request.ItemCreateDto;
@@ -11,8 +13,12 @@ import com.pymez.backend.pymez.DTOs.Request.ItemUpdateDto;
 import com.pymez.backend.pymez.DTOs.Response.ItemResponseDto;
 import com.pymez.backend.pymez.Models.ItemModel;
 
-@Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR) // Change this to SETTER if we get a circular dependencies
-                                                           // error
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, // Change this to SETTER if we get
+                                                                                      // a circular dependencies
+                                                                                      // error
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE // This will ignore the null values
+)
+
 @Javadoc(value = "This is the mapper that will transform DTOs to Models, and Models to DTOs for the Items", authors = {
         "Anthony Alvarez" }, since = "0.1")
 public interface ItemMapper {
@@ -31,12 +37,16 @@ public interface ItemMapper {
     ItemModel itemCreateDtoToItemModel(ItemCreateDto itemCreateDto);
 
     /**
-     * This function will transform an ItemUpdateDto to an ItemModel
+     * This function will transform an ItemUpdateDto to an ItemModel. It will change
+     * only the necessary information when mapping the class
      * 
      * @param itemUpdateDto
-     * @return ItemModel
+     * @return void
      */
-    ItemModel itemUpdateDtoToItemModel(ItemUpdateDto itemUpdateDto);
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateCreated", ignore = true)
+    @Mapping(target = "dateUpdated", ignore = true)
+    void itemUpdateDtoToItemModel(ItemUpdateDto itemUpdateDto, @MappingTarget ItemModel entity);
 
     /**
      * This function will transform an ItemModel to an ItemResponseDto.
