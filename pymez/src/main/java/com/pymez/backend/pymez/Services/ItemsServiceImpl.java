@@ -40,7 +40,6 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
                 .orElseThrow(() -> new ItemsException("The item was not located. ID: " + id));
     }
 
-    // TODO: pagination and filters
     /**
      * This function will get all the items in the database.
      * 
