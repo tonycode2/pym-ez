@@ -30,7 +30,6 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     /**
      * This function will get 1 item with the id.
      * 
-     * @param Long id
      * @throws ItemsException
      * @return ItemResponseDto
      * @see com.pymez.backend.pymez.Services.CRUDInterface#getById(java.lang.Long)
@@ -45,10 +44,6 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     /**
      * This function will get all the items in the database.
      * 
-     * @param int    page
-     * @param int    size
-     * @param String sortedBy
-     * @param String sortDir
      * @return List<ItemResponseDto>
      * @see com.pymez.backend.pymez.Services.CRUDInterface#getAll()
      */
@@ -68,7 +63,6 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     /**
      * This function will save a new item into the database
      * 
-     * @param ItemCreateDto requestDto
      * @return ItemResponseDto
      * @see com.pymez.backend.pymez.Services.CRUDInterface#save(java.lang.Object)
      */
@@ -86,7 +80,7 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
      * the body with just that data and it will change just that
      * Patch can be used here
      * 
-     * @param ItemUpdateDto updateDto
+     * 
      * @throws ItemsException
      * @return ItemResponseDto
      * @see com.pymez.backend.pymez.Services.CRUDInterface#update(java.lang.Object)
@@ -105,7 +99,6 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     /**
      * This function will delete an item from the database
      * 
-     * @param Long id
      * @throws ItemsException
      * @return void
      * @see com.pymez.backend.pymez.Services.CRUDInterface#delete(java.lang.Long)
