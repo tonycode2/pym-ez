@@ -1,7 +1,9 @@
 package com.pymez.backend.pymez.Services;
 
-import java.util.List;
-
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pymez.backend.pymez.DTOs.Request.ItemCreateDto;
@@ -28,6 +30,7 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     /**
      * This function will get 1 item with the id.
      * 
+     * @param Long id
      * @throws ItemsException
      * @return ItemResponseDto
      * @see com.pymez.backend.pymez.Services.CRUDInterface#getById(java.lang.Long)
@@ -42,20 +45,30 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     /**
      * This function will get all the items in the database.
      * 
+     * @param int    page
+     * @param int    size
+     * @param String sortedBy
+     * @param String sortDir
      * @return List<ItemResponseDto>
      * @see com.pymez.backend.pymez.Services.CRUDInterface#getAll()
      */
-    public List<ItemResponseDto> getAll() {
-        var itemsList = repo.findAll();
-        log.info("{} items found", itemsList.size());
-        return itemsList.stream()
-                .map(e -> mapper.itemModelToItemResponseDto(e))
-                .toList();
+    public Page<ItemResponseDto> getAll(int page, int size, String sortedBy, String sortDir) {
+
+        Sort sort = sortDir.equalsIgnoreCase("asc")
+                ? Sort.by(sortedBy).ascending()
+                : Sort.by(sortedBy).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        var filledPage = repo.findAll(pageable).map(mapper::itemModelToItemResponseDto);
+        log.info("Page number: {}. Total of pages: {}. Total of elements: {}", filledPage.getNumber(),
+                filledPage.getTotalPages(), filledPage.getTotalElements());
+        return filledPage;
     }
 
     /**
      * This function will save a new item into the database
      * 
+     * @param ItemCreateDto requestDto
      * @return ItemResponseDto
      * @see com.pymez.backend.pymez.Services.CRUDInterface#save(java.lang.Object)
      */
@@ -73,6 +86,7 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
      * the body with just that data and it will change just that
      * Patch can be used here
      * 
+     * @param ItemUpdateDto updateDto
      * @throws ItemsException
      * @return ItemResponseDto
      * @see com.pymez.backend.pymez.Services.CRUDInterface#update(java.lang.Object)
@@ -91,6 +105,7 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     /**
      * This function will delete an item from the database
      * 
+     * @param Long id
      * @throws ItemsException
      * @return void
      * @see com.pymez.backend.pymez.Services.CRUDInterface#delete(java.lang.Long)
