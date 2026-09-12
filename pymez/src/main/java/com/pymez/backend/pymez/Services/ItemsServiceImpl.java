@@ -44,7 +44,7 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
     /**
      * This function will get all the items in the database.
      * 
-     * @return List<ItemResponseDto>
+     * @return Page<ItemResponseDto>
      * @see com.pymez.backend.pymez.Services.CRUDInterface#getAll()
      */
     public Page<ItemResponseDto> getAll(int page, int size, String sortedBy, String sortDir) {
