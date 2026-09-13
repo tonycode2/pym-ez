@@ -1,13 +1,24 @@
 package com.pymez.backend.pymez.Controllers;
 
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pymez.backend.pymez.DTOs.Request.ItemCreateDto;
+import com.pymez.backend.pymez.DTOs.Request.ItemUpdateDto;
 import com.pymez.backend.pymez.DTOs.Response.ItemResponseDto;
 import com.pymez.backend.pymez.Services.ItemsServiceImpl;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/items")
@@ -20,10 +31,28 @@ public class ItemsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ItemResponseDto> getById(@PathVariable long id) {
-        ItemResponseDto response = service.getById(id);
-        if (response == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(service.getById(id));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<Page<ItemResponseDto>> getAll(@RequestParam int page, @RequestParam int size,
+            @RequestParam String sortedBy, @RequestParam String sortDir) {
+        return ResponseEntity.ok(service.getAll(page, size, sortedBy, sortDir));
+    }
+
+    @PostMapping
+    public ResponseEntity<ItemResponseDto> save(@Valid @RequestBody ItemCreateDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(dto));
+    }
+
+    @PatchMapping
+    public ResponseEntity<ItemResponseDto> update(@Valid @RequestBody ItemUpdateDto dto) {
+        return ResponseEntity.ok(service.update(dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
