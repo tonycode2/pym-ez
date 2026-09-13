@@ -48,9 +48,11 @@ public class ItemsServiceImpl implements CRUDInterface<ItemCreateDto, ItemUpdate
      */
     public Page<ItemResponseDto> getAll(int page, int size, String sortedBy, String sortDir) {
 
-        Sort sort = sortDir.equalsIgnoreCase("asc")
-                ? Sort.by(sortedBy).ascending()
-                : Sort.by(sortedBy).descending();
+        String safeSortField = (sortedBy != null && !sortedBy.trim().isEmpty()) ? sortedBy : "id";
+
+        Sort sort = "asc".equalsIgnoreCase(sortDir)
+                ? Sort.by(safeSortField).ascending()
+                : Sort.by(safeSortField).descending();
 
         Pageable pageable = PageRequest.of(page, size, sort);
         var filledPage = repo.findAll(pageable).map(mapper::itemModelToItemResponseDto);
