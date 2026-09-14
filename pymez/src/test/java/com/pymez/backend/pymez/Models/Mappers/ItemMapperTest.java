@@ -59,7 +59,7 @@ public class ItemMapperTest {
     }
 
     @Test
-    void testItemCreateDtoToItemModel() {
+    void testItemCreateDtoToItemModel_ShouldReturnItemModel() {
 
         ItemModel model = mapper.itemCreateDtoToItemModel(itemCreateDtoSetup);
 
@@ -71,7 +71,7 @@ public class ItemMapperTest {
     }
 
     @Test
-    void testItemModelToItemResponseDto() {
+    void testItemModelToItemResponseDto_ShouldReturnItemResponseDto() {
 
         ItemUpdateDto dto = new ItemUpdateDto();
         dto.setName("Mouse");
@@ -96,7 +96,7 @@ public class ItemMapperTest {
     }
 
     @Test
-    void testItemUpdateDtoToItemModel() {
+    void testItemUpdateDtoToItemModel_ShouldReturnItemModel() {
 
         ItemResponseDto dto = mapper.itemModelToItemResponseDto(itemModelSetup);
 
