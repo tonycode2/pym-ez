@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.pymez.backend.pymez.DTOs.Request.ItemCreateDto;
@@ -20,24 +21,47 @@ public class ItemMapperTest {
 
     private final ItemMapper mapper = ItemMapper.INSTANCE;
 
+    private ItemCreateDto itemCreateDtoSetup;
+    private ItemModel itemModelSetup;
+
+    @BeforeEach
+    void setUp() {
+        itemCreateDtoSetup = new ItemCreateDto();
+        itemCreateDtoSetup.setName("Teclado");
+        itemCreateDtoSetup.setColor("Verde");
+        itemCreateDtoSetup.setWeight(new BigDecimal("4.4"));
+        itemCreateDtoSetup.setHeight(new BigDecimal("5.5"));
+        itemCreateDtoSetup.setCategories(List.of("Tecnologia"));
+        itemCreateDtoSetup.setItemPrice(new BigDecimal("55.9"));
+        itemCreateDtoSetup.setSellPrice(new BigDecimal("100.9"));
+        itemCreateDtoSetup.setAvailableQuantity(19);
+        itemCreateDtoSetup.setRequestedQuantity(200);
+        itemCreateDtoSetup.setIsAvailable(true);
+        itemCreateDtoSetup.setDateCreated(Instant.now());
+        itemCreateDtoSetup.setDateUpdated(Instant.now());
+        itemCreateDtoSetup.setLastSoldAt(Instant.now());
+
+        itemModelSetup = new ItemModel();
+        itemModelSetup.setId(1l);
+        itemModelSetup.setName("Teclado");
+        itemModelSetup.setColor("Verde");
+        itemModelSetup.setWeight(new BigDecimal("4.4"));
+        itemModelSetup.setHeight(new BigDecimal("5.5"));
+        itemModelSetup.setCategories(List.of("Tecnologia"));
+        itemModelSetup.setItemPrice(new BigDecimal("55.9"));
+        itemModelSetup.setSellPrice(new BigDecimal("100.9"));
+        itemModelSetup.setAvailableQuantity(19);
+        itemModelSetup.setRequestedQuantity(200);
+        itemModelSetup.setIsAvailable(true);
+        itemModelSetup.setDateCreated(Instant.now());
+        itemModelSetup.setDateUpdated(Instant.now());
+        itemModelSetup.setLastSoldAt(Instant.now());
+    }
+
     @Test
     void testItemCreateDtoToItemModel() {
-        ItemCreateDto dto = new ItemCreateDto();
-        dto.setName("Teclado");
-        dto.setColor("Verde");
-        dto.setWeight(new BigDecimal("4.4"));
-        dto.setHeight(new BigDecimal("5.5"));
-        dto.setCategories(List.of("Tecnologia"));
-        dto.setItemPrice(new BigDecimal("55.9"));
-        dto.setSellPrice(new BigDecimal("100.9"));
-        dto.setAvailableQuantity(19);
-        dto.setRequestedQuantity(200);
-        dto.setIsAvailable(true);
-        dto.setDateCreated(Instant.now());
-        dto.setDateUpdated(Instant.now());
-        dto.setLastSoldAt(Instant.now());
 
-        ItemModel model = mapper.itemCreateDtoToItemModel(dto);
+        ItemModel model = mapper.itemCreateDtoToItemModel(itemCreateDtoSetup);
 
         assertNotNull(model, "The model should not be null");
         assertEquals("Teclado", model.getName());
@@ -48,21 +72,6 @@ public class ItemMapperTest {
 
     @Test
     void testItemModelToItemResponseDto() {
-        ItemModel model = new ItemModel();
-        model.setId(1l);
-        model.setName("Teclado");
-        model.setColor("Verde");
-        model.setWeight(new BigDecimal("4.4"));
-        model.setHeight(new BigDecimal("5.5"));
-        model.setCategories(List.of("Tecnologia"));
-        model.setItemPrice(new BigDecimal("55.9"));
-        model.setSellPrice(new BigDecimal("100.9"));
-        model.setAvailableQuantity(19);
-        model.setRequestedQuantity(200);
-        model.setIsAvailable(true);
-        model.setDateCreated(Instant.now());
-        model.setDateUpdated(Instant.now());
-        model.setLastSoldAt(Instant.now());
 
         ItemUpdateDto dto = new ItemUpdateDto();
         dto.setName("Mouse");
@@ -71,40 +80,25 @@ public class ItemMapperTest {
         dto.setSellPrice(new BigDecimal("90.6"));
         dto.setIsAvailable(false);
 
-        mapper.itemUpdateDtoToItemModel(dto, model);
+        mapper.itemUpdateDtoToItemModel(dto, itemModelSetup);
 
-        assertNotNull(model, "The model should not be null");
-        assertEquals(1l, model.getId());
-        assertEquals("Mouse", model.getName());
-        assertEquals(new BigDecimal("9.7"), model.getHeight());
-        assertEquals(new BigDecimal("60.12"), model.getItemPrice());
-        assertEquals(new BigDecimal("90.6"), model.getSellPrice());
-        assertEquals(19, model.getAvailableQuantity());
-        assertEquals("Verde", model.getColor());
-        assertFalse(model.getIsAvailable());
+        assertNotNull(itemModelSetup, "The model should not be null");
+        assertEquals(1l, itemModelSetup.getId());
+        assertEquals("Mouse", itemModelSetup.getName());
+        assertEquals(new BigDecimal("9.7"), itemModelSetup.getHeight());
+        assertEquals(new BigDecimal("60.12"), itemModelSetup.getItemPrice());
+        assertEquals(new BigDecimal("90.6"), itemModelSetup.getSellPrice());
+        assertEquals(19, itemModelSetup.getAvailableQuantity());
+        assertEquals("Verde", itemModelSetup.getColor());
+        assertFalse(itemModelSetup.getIsAvailable());
 
-        assertNotNull(model.getId(), "The ID should not be null");
+        assertNotNull(itemModelSetup.getId(), "The ID should not be null");
     }
 
     @Test
     void testItemUpdateDtoToItemModel() {
-        ItemModel model = new ItemModel();
-        model.setId(1l);
-        model.setName("Teclado");
-        model.setColor("Verde");
-        model.setWeight(new BigDecimal("4.4"));
-        model.setHeight(new BigDecimal("5.5"));
-        model.setCategories(List.of("Tecnologia"));
-        model.setItemPrice(new BigDecimal("55.9"));
-        model.setSellPrice(new BigDecimal("100.9"));
-        model.setAvailableQuantity(19);
-        model.setRequestedQuantity(200);
-        model.setIsAvailable(true);
-        model.setDateCreated(Instant.now());
-        model.setDateUpdated(Instant.now());
-        model.setLastSoldAt(Instant.now());
 
-        ItemResponseDto dto = mapper.itemModelToItemResponseDto(model);
+        ItemResponseDto dto = mapper.itemModelToItemResponseDto(itemModelSetup);
 
         assertNotNull(dto, "The DTO should not be null");
         assertEquals(19, dto.getAvailableQuantity());
