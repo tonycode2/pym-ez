@@ -2,7 +2,7 @@ package com.pymez.backend.pymez.DTOs.Response;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ItemResponseDto {
     private String name;
@@ -10,7 +10,7 @@ public class ItemResponseDto {
     private String color;
     private BigDecimal weight;
     private BigDecimal height;
-    private ArrayList<String> categories;
+    private List<String> categories;
     private BigDecimal itemPrice;
     private BigDecimal sellPrice;
     private Integer availableQuantity;
@@ -22,7 +22,7 @@ public class ItemResponseDto {
     private Instant lastSoldAt;
 
     public ItemResponseDto(String name, String description, String color, BigDecimal weight, BigDecimal height,
-            ArrayList<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
+            List<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
             Integer requestedQuantity, Boolean isAvailable, String picUrl, Instant dateCreated, Instant dateUpdated,
             Instant lastSoldAt) {
         this.name = name;
@@ -85,11 +85,11 @@ public class ItemResponseDto {
         this.height = height;
     }
 
-    public ArrayList<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(ArrayList<String> categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 

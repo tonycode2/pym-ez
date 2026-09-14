@@ -2,7 +2,7 @@ package com.pymez.backend.pymez.Models;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -29,7 +29,7 @@ public class ItemModel {
     private BigDecimal weight;
     private BigDecimal height;
     @ElementCollection
-    private ArrayList<String> categories;
+    private List<String> categories;
     @Column(name = "item_price")
     private BigDecimal itemPrice;
     @Column(name = "sell_price")
@@ -52,7 +52,7 @@ public class ItemModel {
     private Instant lastSoldAt;
 
     public ItemModel(Long id, String name, String description, String color, BigDecimal weight, BigDecimal height,
-            ArrayList<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
+            List<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
             Integer requestedQuantity, Boolean isAvailable, String picUrl, Instant dateCreated, Instant dateUpdated,
             Instant lastSoldAt) {
         this.id = id;
@@ -125,11 +125,11 @@ public class ItemModel {
         this.height = height;
     }
 
-    public ArrayList<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(ArrayList<String> categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 

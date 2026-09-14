@@ -2,7 +2,7 @@ package com.pymez.backend.pymez.DTOs.Request;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +27,7 @@ public class ItemCreateDto {
     @NotNull(message = "The height must not be null")
     private BigDecimal height;
     @Size(min = 1, max = 5, message = "The categories have a min of 1 and a max of 5")
-    private ArrayList<String> categories;
+    private List<String> categories;
     @Digits(integer = 10, fraction = 4, message = "The price should be a number")
     @Positive(message = "The price should be a positive number")
     @NotNull(message = "The item price must not be null")
@@ -46,10 +46,10 @@ public class ItemCreateDto {
     private Integer requestedQuantity;
     @NotNull
     private Boolean isAvailable;
-    @PastOrPresent(message = "The date created can not be a past date")
     @NotNull(message = "The date created must not be null")
     @NotBlank(message = "The pic url must not be empty or null")
     private String picUrl;
+    @PastOrPresent(message = "The date created can not be a past date")
     private Instant dateCreated;
     @PastOrPresent(message = "The date updated can not be a past date")
     @NotNull(message = "The date updated must not be null")
@@ -62,7 +62,7 @@ public class ItemCreateDto {
             String color,
             BigDecimal weight,
             BigDecimal height,
-            ArrayList<String> categories,
+            List<String> categories,
             BigDecimal itemPrice,
             BigDecimal sellPrice,
             Integer availableQuantity,
@@ -132,11 +132,11 @@ public class ItemCreateDto {
         this.height = height;
     }
 
-    public ArrayList<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(ArrayList<String> categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 
