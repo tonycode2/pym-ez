@@ -32,7 +32,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.pymez.backend.pymez.DTOs.Request.ItemCreateDto;
 import com.pymez.backend.pymez.DTOs.Request.ItemUpdateDto;
 import com.pymez.backend.pymez.DTOs.Response.ItemResponseDto;
-import com.pymez.backend.pymez.Models.ItemModel;
 import com.pymez.backend.pymez.Services.ItemsServiceImpl;
 
 @WebMvcTest(ItemsController.class)
