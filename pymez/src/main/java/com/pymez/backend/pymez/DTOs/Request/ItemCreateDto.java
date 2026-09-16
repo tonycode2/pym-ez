@@ -26,7 +26,7 @@ public class ItemCreateDto {
     @Positive(message = "The height should be a positive number")
     @NotNull(message = "The height must not be null")
     private BigDecimal height;
-    @Size(min = 1, max = 5, message = "The categories have a min of 1 and a max of 5")
+    @Size(min = 0, max = 5, message = "The categories have a min of 1 and a max of 5")
     private List<String> categories;
     @Digits(integer = 10, fraction = 4, message = "The price should be a number")
     @Positive(message = "The price should be a positive number")

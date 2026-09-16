@@ -103,6 +103,5 @@ public class ItemMapperTest {
         assertNotNull(dto, "The DTO should not be null");
         assertEquals(19, dto.getAvailableQuantity());
         assertEquals(new BigDecimal("5.5"), dto.getHeight());
-
     }
 }
