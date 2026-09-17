@@ -118,7 +118,8 @@ public class ItemsControllerTest {
 
         doNothing().when(serviceMock).delete(idToDelete);
 
-        mockMvc.perform(delete("/api/v1/items/{id}", idToDelete))
+        mockMvc.perform(delete("/api/v1/items/{id}", idToDelete)
+                .header("X-Tenant-ID", "test_tenant"))
                 .andExpect(status().isNoContent());
 
         verify(serviceMock, times(1)).delete(idToDelete);
@@ -133,6 +134,7 @@ public class ItemsControllerTest {
         when(serviceMock.getAll(0, 10, "id", "asc")).thenReturn(responsePage);
 
         mockMvc.perform(get("/api/v1/items/filter")
+                .header("X-Tenant-ID", "test_tenant")
                 .param("page", "0")
                 .param("size", "10")
                 .param("sortedBy", "id")
@@ -150,6 +152,7 @@ public class ItemsControllerTest {
     void testGetById() throws Exception {
         when(serviceMock.getById(1L)).thenReturn(itemResponseDtoSetup);
         mockMvc.perform(get("/api/v1/items/1")
+                .header("X-Tenant-ID", "test_tenant")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Keyboard"))
@@ -165,6 +168,7 @@ public class ItemsControllerTest {
         String jsonBody = objectMapper.writeValueAsString(itemCreateDtoSetup);
 
         mockMvc.perform(post("/api/v1/items")
+                .header("X-Tenant-ID", "test_tenant")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBody))
                 .andExpect(status().isCreated())
@@ -186,6 +190,7 @@ public class ItemsControllerTest {
         when(serviceMock.update(any(ItemUpdateDto.class))).thenReturn(itemResponseDtoSetupUpdated);
 
         mockMvc.perform(patch("/api/v1/items")
+                .header("X-Tenant-ID", "test_tenant")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonUpdateItem))
                 .andExpect(status().isOk())

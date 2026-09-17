@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
+import org.hibernate.annotations.TenantId;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -25,6 +27,9 @@ public class ItemModel {
     private String name;
     @Column(columnDefinition = "TEXT")
     private String description;
+    @TenantId
+    @Column(name = "tenant_id")
+    private String tenantId;
     private String color;
     private BigDecimal weight;
     private BigDecimal height;
@@ -51,13 +56,15 @@ public class ItemModel {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Instant lastSoldAt;
 
-    public ItemModel(Long id, String name, String description, String color, BigDecimal weight, BigDecimal height,
+    public ItemModel(Long id, String name, String description, String tenantId, String color, BigDecimal weight,
+            BigDecimal height,
             List<String> categories, BigDecimal itemPrice, BigDecimal sellPrice, Integer availableQuantity,
             Integer requestedQuantity, Boolean isAvailable, String picUrl, Instant dateCreated, Instant dateUpdated,
             Instant lastSoldAt) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.tenantId = tenantId;
         this.color = color;
         this.weight = weight;
         this.height = height;
@@ -99,6 +106,14 @@ public class ItemModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     public String getColor() {
@@ -213,7 +228,8 @@ public class ItemModel {
      */
     @Override
     public String toString() {
-        return "ItemModel [id=" + id + ", name=" + name + ", description=" + description + ", color=" + color
+        return "ItemModel [id=" + id + ", name=" + name + ", description=" + description + ", tenantId=" + tenantId
+                + ", color=" + color
                 + ", weight=" + weight + ", height=" + height + ", itemPrice=" + itemPrice + ", sellPrice=" + sellPrice
                 + ", availableQuantity=" + availableQuantity + ", requestedQuantity=" + requestedQuantity
                 + ", isAvailable=" + isAvailable + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated

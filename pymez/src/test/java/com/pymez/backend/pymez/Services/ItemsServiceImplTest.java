@@ -46,6 +46,7 @@ public class ItemsServiceImplTest {
         itemModelSetup1 = new ItemModel(1l,
                 "Keyboard",
                 "Brand new Keyboard",
+                "Ferreteria",
                 "White",
                 new BigDecimal("9.9"),
                 new BigDecimal("7.7"),
@@ -63,6 +64,7 @@ public class ItemsServiceImplTest {
         itemModelSetup2 = new ItemModel(2l,
                 "Keyboard",
                 "Brand new Keyboard",
+                "Ferreteria",
                 "Black",
                 new BigDecimal("9.9"),
                 new BigDecimal("7.7"),
@@ -79,6 +81,7 @@ public class ItemsServiceImplTest {
 
         itemModelSetupUpdated = new ItemModel(3l, "Special Keyboard",
                 "Brand new Keyboard",
+                "Ferreteria",
                 "Cyan",
                 new BigDecimal("9.9"),
                 new BigDecimal("7.7"),
@@ -95,6 +98,7 @@ public class ItemsServiceImplTest {
 
         itemModelSetupNotUpdated = new ItemModel(3l, "Keyboard",
                 "Brand new Keyboard",
+                "Ferreteria",
                 "Black",
                 new BigDecimal("9.9"),
                 new BigDecimal("7.7"),
@@ -257,7 +261,8 @@ public class ItemsServiceImplTest {
     void testUpdate_ShouldReturnItemResponseDto() {
         when(repoMock.findById(3l)).thenReturn(Optional.of(itemModelSetupNotUpdated));
         when(repoMock.save(itemModelSetupUpdated)).thenReturn(itemModelSetupUpdated);
-        when(mapperMock.itemModelToItemResponseDto(itemModelSetupUpdated)).thenReturn(itemResponseDtoSetupUpdated);
+        when(mapperMock.itemModelToItemResponseDto(itemModelSetupUpdated))
+                .thenReturn(itemResponseDtoSetupUpdated);
 
         ItemResponseDto response = service.update(itemUpdateDtoSetup);
 
